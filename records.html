@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maersk Contract Logistics - Submitted Records</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Prototype v1</p>
+        <h1>Submitted Records</h1>
+        <p class="hero-copy">
+          Full list of submitted downtime records with edit, delete, and export actions.
+        </p>
+      </div>
+      <div class="hero-note">
+        <strong>Prototype note:</strong>
+        <span>
+          Edit and delete represent central admin maintenance. In the final solution these
+          would be permission-controlled through Microsoft 365 roles.
+        </span>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Submit record</a>
+      <a href="metrics.html" class="nav-link">Metrics</a>
+      <a href="records.html" class="nav-link active">Submitted records</a>
+    </nav>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="card">
+          <div class="card-heading">
+            <h2>Filters and actions</h2>
+            <p>Focus the list by time, location, customer, and application.</p>
+          </div>
+
+          <div class="filters-grid">
+            <label>
+              Reporting month
+              <select id="filter-month"></select>
+            </label>
+            <label>
+              Region
+              <select id="filter-region"></select>
+            </label>
+            <label>
+              Country
+              <select id="filter-country"></select>
+            </label>
+            <label>
+              Site ID
+              <select id="filter-site"></select>
+            </label>
+            <label>
+              Customer
+              <select id="filter-customer"></select>
+            </label>
+            <label>
+              Application / system
+              <select id="filter-application"></select>
+            </label>
+          </div>
+
+          <div class="stacked-actions">
+            <button type="button" id="clear-filters" class="secondary">Clear filters</button>
+            <button type="button" id="seed-demo-data" class="secondary">Load / reset demo data</button>
+            <button type="button" id="export-csv" class="primary">Export filtered CSV</button>
+            <button type="button" id="clear-all-data" class="ghost danger">Clear all local data</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-heading">
+            <h2>Linked Excel file</h2>
+            <p>Save records to a real .xlsx file on your computer so they persist outside the browser.</p>
+          </div>
+
+          <p id="excel-status" class="excel-status">Not linked to an Excel file. Records are stored in this browser only.</p>
+
+          <div class="stacked-actions">
+            <button type="button" id="link-excel" class="primary">Link Excel file</button>
+            <button type="button" id="sync-excel" class="secondary">Sync from Excel</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <section class="card">
+          <div class="card-heading">
+            <h2>Submitted records</h2>
+            <p>Every record captured for the current filter selection.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Incident date</th>
+                  <th>Reference</th>
+                  <th>Site</th>
+                  <th>Country</th>
+                  <th>Application</th>
+                  <th>Outage hrs</th>
+                  <th>Lost hrs</th>
+                  <th>Category</th>
+                  <th>Root cause</th>
+                  <th>Submitter</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="records-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="empty-state-template">
+    <div class="empty-state">
+      <strong>No records match the current view.</strong>
+      <span>Load demo data or submit a new downtime record to populate the list.</span>
+    </div>
+  </template>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

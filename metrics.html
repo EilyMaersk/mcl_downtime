@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maersk Contract Logistics - Downtime Metrics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Prototype v1</p>
+        <h1>Downtime Metrics</h1>
+        <p class="hero-copy">
+          Leadership view of operational lost hours across sites, regions, and applications.
+        </p>
+      </div>
+      <div class="hero-note">
+        <strong>Prototype note:</strong>
+        <span>
+          Metrics are calculated live from records stored in your browser. Use the filters
+          to focus on a specific month, region, customer, or application.
+        </span>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Submit record</a>
+      <a href="metrics.html" class="nav-link active">Metrics</a>
+      <a href="records.html" class="nav-link">Submitted records</a>
+    </nav>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="card">
+          <div class="card-heading">
+            <h2>Filters</h2>
+            <p>Focus reporting by time, location, customer, and application.</p>
+          </div>
+
+          <div class="filters-grid">
+            <label>
+              Reporting month
+              <select id="filter-month"></select>
+            </label>
+            <label>
+              Region
+              <select id="filter-region"></select>
+            </label>
+            <label>
+              Country
+              <select id="filter-country"></select>
+            </label>
+            <label>
+              Site ID
+              <select id="filter-site"></select>
+            </label>
+            <label>
+              Customer
+              <select id="filter-customer"></select>
+            </label>
+            <label>
+              Application / system
+              <select id="filter-application"></select>
+            </label>
+          </div>
+
+          <div class="stacked-actions">
+            <button type="button" id="clear-filters" class="secondary">Clear filters</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <section class="kpi-grid" id="kpi-grid"></section>
+
+        <article class="card map-card">
+          <div class="card-heading">
+            <h2>Lost hours by location</h2>
+            <p>Geographic heat map of operational lost hours by country.</p>
+          </div>
+          <div id="world-map" class="world-map"></div>
+        </article>
+
+        <section class="charts-grid">
+          <article class="card">
+            <div class="card-heading">
+              <h2>Lost hours by month</h2>
+              <p>Leadership KPI showing impact trend over time.</p>
+            </div>
+            <div id="chart-monthly" class="chart-list"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-heading">
+              <h2>Lost hours by region</h2>
+              <p>Compare impact concentration across regions.</p>
+            </div>
+            <div id="chart-region" class="chart-list"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-heading">
+              <h2>Lost hours by country</h2>
+              <p>Spot high-impact countries within the reporting period.</p>
+            </div>
+            <div id="chart-country" class="chart-list"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-heading">
+              <h2>Cost impact by month</h2>
+              <p>Reserved for a later phase once the cost model is agreed.</p>
+            </div>
+            <div class="placeholder">
+              <strong>Coming later</strong>
+              <span>
+                The prototype keeps lost hours and outage duration separate so a cost model
+                can be added without redesigning the data structure.
+              </span>
+            </div>
+          </article>
+        </section>
+
+        <section class="table-grid">
+          <article class="card">
+            <div class="card-heading">
+              <h2>Top impacted sites</h2>
+              <p>Quick view of the highest lost-hour sites in the selected slice.</p>
+            </div>
+            <div id="top-sites" class="mini-table"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-heading">
+              <h2>Top affected applications</h2>
+              <p>Identify recurring system issues needing corrective action.</p>
+            </div>
+            <div id="top-applications" class="mini-table"></div>
+          </article>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="empty-state-template">
+    <div class="empty-state">
+      <strong>No records match the current view.</strong>
+      <span>Submit a new downtime record to populate the dashboard.</span>
+    </div>
+  </template>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="app.js"></script>
+</body>
+</html>
