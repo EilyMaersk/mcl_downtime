@@ -10,41 +10,42 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="hero">
-      <div>
-        <p class="eyebrow">Prototype v1</p>
-        <h1>Submitted Records</h1>
-        <p class="hero-copy">
-          Full list of submitted downtime records with edit, delete, and export actions.
-        </p>
+  <div class="topbar">
+    <svg class="maersk-logo" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,1 13.95,7.95 20.6,5.14 16.39,11 22.72,14.45 15.52,14.81 16.77,21.91 12,16.5 7.23,21.91 8.48,14.81 1.28,14.45 7.61,11 3.4,5.14 10.05,7.95" fill="#ffffff"/></svg>
+    <span class="topbar-title">Maersk</span>
+  </div>
+  <div class="dashboard">
+    <aside class="sidenav">
+      <div class="brand">
+        <span class="brand-mark">MC</span>
+        <span class="brand-name">MCL Downtime<span>Operational reporting</span></span>
       </div>
-      <div class="hero-note">
-        <strong>Prototype note:</strong>
-        <span>
-          Edit and delete represent central admin maintenance. In the final solution these
-          would be permission-controlled through Microsoft 365 roles.
-        </span>
-      </div>
-    </header>
+      <nav class="side-nav-links">
+        <a href="index.html" class="nav-link"><span class="nav-ico"></span>Submit record</a>
+        <a href="metrics.html" class="nav-link"><span class="nav-ico"></span>Metrics</a>
+        <a href="records.html" class="nav-link active"><span class="nav-ico"></span>Submitted records</a>
+      </nav>
+      <div class="sidenav-foot">Prototype v1 · Local browser storage</div>
+    </aside>
 
-    <nav class="main-nav">
-      <a href="index.html" class="nav-link">Submit record</a>
-      <a href="metrics.html" class="nav-link">Metrics</a>
-      <a href="records.html" class="nav-link active">Submitted records</a>
-    </nav>
+    <div class="main">
+      <header class="page-head">
+        <div>
+          <h1>Submitted Records</h1>
+          <p>Full list of submitted downtime records with edit, delete, and export actions.</p>
+        </div>
+        <div class="toolbar-actions">
+          <button type="button" id="export-csv" class="primary">Export CSV</button>
+          <button type="button" id="seed-demo-data" class="secondary">Load / reset demo data</button>
+          <button type="button" id="clear-all-data" class="ghost danger">Clear all data</button>
+        </div>
+      </header>
 
-    <main class="layout">
-      <aside class="sidebar">
-        <section class="card">
-          <div class="card-heading">
-            <h2>Filters and actions</h2>
-            <p>Focus the list by time, location, customer, and application.</p>
-          </div>
-
-          <div class="filters-grid">
+      <main class="content">
+        <section class="toolbar">
+          <div class="filters-bar">
             <label>
-              Reporting month
+              Month
               <select id="filter-month"></select>
             </label>
             <label>
@@ -56,7 +57,7 @@
               <select id="filter-country"></select>
             </label>
             <label>
-              Site ID
+              Site
               <select id="filter-site"></select>
             </label>
             <label>
@@ -64,35 +65,28 @@
               <select id="filter-customer"></select>
             </label>
             <label>
-              Application / system
+              Application
               <select id="filter-application"></select>
             </label>
           </div>
-
-          <div class="stacked-actions">
+          <div class="toolbar-actions">
             <button type="button" id="clear-filters" class="secondary">Clear filters</button>
-            <button type="button" id="seed-demo-data" class="secondary">Load / reset demo data</button>
-            <button type="button" id="export-csv" class="primary">Export filtered CSV</button>
-            <button type="button" id="clear-all-data" class="ghost danger">Clear all local data</button>
           </div>
         </section>
 
-        <section class="card">
-          <div class="card-heading">
-            <h2>Linked Excel file</h2>
-            <p>Save records to a real .xlsx file on your computer so they persist outside the browser.</p>
-          </div>
-
-          <p id="excel-status" class="excel-status">Not linked to an Excel file. Records are stored in this browser only.</p>
-
-          <div class="stacked-actions">
-            <button type="button" id="link-excel" class="primary">Link Excel file</button>
-            <button type="button" id="sync-excel" class="secondary">Sync from Excel</button>
+        <section class="card excel-card">
+          <div class="excel-card-head">
+            <div>
+              <h2>Linked Excel file</h2>
+              <p id="excel-status" class="excel-status">Not linked to an Excel file. Records are stored in this browser only.</p>
+            </div>
+            <div class="toolbar-actions">
+              <button type="button" id="link-excel" class="primary">Link Excel file</button>
+              <button type="button" id="sync-excel" class="secondary">Sync from Excel</button>
+            </div>
           </div>
         </section>
-      </aside>
 
-      <section class="content">
         <section class="card">
           <div class="card-heading">
             <h2>Submitted records</h2>
@@ -119,8 +113,8 @@
             </table>
           </div>
         </section>
-      </section>
-    </main>
+      </main>
+    </div>
   </div>
 
   <template id="empty-state-template">

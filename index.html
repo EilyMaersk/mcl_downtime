@@ -10,39 +10,40 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="hero">
-      <div>
-        <p class="eyebrow">Prototype v1</p>
-        <h1>Operational Downtime Reporting</h1>
-        <p class="hero-copy">
-          Simple browser-based prototype for site teams to submit operational lost hours
-          and for leadership to monitor downtime impact trends.
-        </p>
+  <div class="topbar">
+    <svg class="maersk-logo" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,1 13.95,7.95 20.6,5.14 16.39,11 22.72,14.45 15.52,14.81 16.77,21.91 12,16.5 7.23,21.91 8.48,14.81 1.28,14.45 7.61,11 3.4,5.14 10.05,7.95" fill="#ffffff"/></svg>
+    <span class="topbar-title">Maersk</span>
+  </div>
+  <div class="dashboard">
+    <aside class="sidenav">
+      <div class="brand">
+        <span class="brand-mark">MC</span>
+        <span class="brand-name">MCL Downtime<span>Operational reporting</span></span>
       </div>
-      <div class="hero-note">
-        <strong>Prototype note:</strong>
-        <span>
-          This version stores records in your browser so it can run anywhere without setup.
-          The data model and screens are structured for a later SharePoint / Microsoft 365 rollout.
-        </span>
-      </div>
-    </header>
+      <nav class="side-nav-links">
+        <a href="index.html" class="nav-link active"><span class="nav-ico"></span>Submit record</a>
+        <a href="metrics.html" class="nav-link"><span class="nav-ico"></span>Metrics</a>
+        <a href="records.html" class="nav-link"><span class="nav-ico"></span>Submitted records</a>
+      </nav>
+      <div class="sidenav-foot">Prototype v1 · Local browser storage</div>
+    </aside>
 
-    <nav class="main-nav">
-      <a href="index.html" class="nav-link active">Submit record</a>
-      <a href="metrics.html" class="nav-link">Metrics</a>
-      <a href="records.html" class="nav-link">Submitted records</a>
-    </nav>
-
-    <main class="page">
-      <section class="card">
-        <div class="card-heading">
-          <h2>Submit downtime record</h2>
+    <div class="main">
+      <header class="page-head">
+        <div>
+          <h1>Submit downtime record</h1>
           <p>Capture site-level impact for a specific incident occurrence.</p>
         </div>
+      </header>
 
-        <form id="record-form" class="form-grid">
+      <main class="content page-form">
+        <section class="card">
+          <div class="card-heading">
+            <h2>Incident details</h2>
+            <p>All fields are required. Outage duration is calculated from the start and end times.</p>
+          </div>
+
+          <form id="record-form" class="form-grid">
           <input type="hidden" id="record-id" name="recordId">
 
           <label>
@@ -133,6 +134,7 @@
         </form>
       </section>
     </main>
+    </div>
   </div>
 
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
