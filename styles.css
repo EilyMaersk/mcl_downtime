@@ -5,10 +5,11 @@
   --text: #232b36;
   --muted: #7a8694;
   --line: #e6eaf0;
-  --primary: #3b7ddd;
-  --primary-dark: #2f68bd;
-  --primary-soft: #eef4fd;
-  --accent: #2bb7a3;
+  --primary: #0e9cd6;
+  --primary-dark: #0b7fae;
+  --primary-soft: #e2f3fb;
+  --accent: #ff7a59;
+  --accent-soft: #ffece6;
   --danger: #e0574d;
   --success: #35a97a;
   --shadow: 0 1px 2px rgba(20, 33, 61, 0.04), 0 4px 14px rgba(20, 33, 61, 0.05);
@@ -387,11 +388,36 @@ button.danger {
 }
 
 .kpi-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 20px;
+}
+
+.kpi-icon {
+  flex: none;
+  display: grid;
+  place-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.kpi-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.kpi-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .kpi-label {
@@ -405,8 +431,8 @@ button.danger {
 
 .kpi-value {
   display: block;
-  margin-top: 10px;
-  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+  margin-top: 8px;
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
   font-weight: 600;
   letter-spacing: -0.02em;
 }

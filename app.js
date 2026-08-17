@@ -983,6 +983,13 @@ function renderDashboard() {
   renderWorldMap(records);
 }
 
+const KPI_ICONS = {
+  warehouse: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8.5L12 4l9 4.5V21"/><path d="M2 21h20"/><rect x="7" y="13" width="10" height="8"/><path d="M7 17h10"/></svg>',
+  box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5"/><path d="M12 12v9"/><path d="M8 5.25l8 4.5"/></svg>',
+  truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2z"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="6.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>',
+  gauge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18a9 9 0 1 1 17 0"/><path d="M12 14l4.5-3"/><circle cx="12" cy="14" r="1.3"/></svg>'
+};
+
 function renderKpis(records) {
   const totalLostHours = records.reduce((sum, record) => sum + record.operationalLostHours, 0);
   const totalOutageHours = records.reduce((sum, record) => sum + record.outageDurationHours, 0);
@@ -993,21 +1000,25 @@ function renderKpis(records) {
 
   const kpis = [
     {
+      icon: KPI_ICONS.warehouse,
       label: "Total lost hours",
       value: formatHours(totalLostHours),
       subtext: `${records.length} site submissions in scope`
     },
     {
+      icon: KPI_ICONS.box,
       label: "Total incidents",
       value: String(records.length),
       subtext: `${impactedSites} impacted sites`
     },
     {
+      icon: KPI_ICONS.truck,
       label: "Average impact",
       value: formatHours(averageLostHours),
       subtext: "Average lost hours per submitted record"
     },
     {
+      icon: KPI_ICONS.gauge,
       label: "Impact multiplier",
       value: `${roundNumber(impactMultiplier).toFixed(2)}x`,
       subtext: `${impactedSites} impacted sites | ${periodText}`
@@ -1016,9 +1027,12 @@ function renderKpis(records) {
 
   elements.kpiGrid.innerHTML = kpis.map((kpi) => `
     <article class="kpi-card">
-      <span class="kpi-label">${escapeHtml(kpi.label)}</span>
-      <span class="kpi-value">${escapeHtml(kpi.value)}</span>
-      <span class="kpi-subtext">${escapeHtml(kpi.subtext)}</span>
+      <span class="kpi-icon">${kpi.icon}</span>
+      <div class="kpi-body">
+        <span class="kpi-label">${escapeHtml(kpi.label)}</span>
+        <span class="kpi-value">${escapeHtml(kpi.value)}</span>
+        <span class="kpi-subtext">${escapeHtml(kpi.subtext)}</span>
+      </div>
     </article>
   `).join("");
 }
